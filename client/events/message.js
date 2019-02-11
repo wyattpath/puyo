@@ -7,7 +7,7 @@ module.exports = async (client, msg) => {
     if (msg.channel.type === "dm") return;
 
     let messageArray = msg.content.split(" ");
-    let cmd = messageArray[0];
+    let cmd = messageArray[0].toLowerCase();
     let args = messageArray.slice(1);
     let prefix = process.env.PREFIX;
     let commandFile;
