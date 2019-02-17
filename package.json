@@ -8,12 +8,15 @@
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "^2.6.9",
+    "discord": "^0.8.2",
     "discord.js": "^11.4.2",
     "express": "~4.16.0",
     "http-errors": "^1.6.3",
     "morgan": "~1.9.0",
     "nodemon": "^1.18.10",
-    "pug": "^2.0.0-beta11",
+    "pg": "^7.8.0",
+    "pug": "^2.0.3",
     "stylus": "0.54.5"
-  }
+  },
+  "devDependencies": {}
 }
