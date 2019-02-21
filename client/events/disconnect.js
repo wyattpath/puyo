@@ -5,12 +5,15 @@ const Discord = require('discord.js');
  */
 module.exports = async (client) => {
 
-    let embed = await new Discord.RichEmbed()
-        .setColor("RED")
-        .setDescription(`Disconnected!`);
-    let channel = await client.channels.get(process.env.CONSOLELOGID);
-    if(channel && channel.permissionsFor(channel.guild.me).has("SEND_MESSAGES")){
-        channel.send(embed);
+    try {
+        let embed = await new Discord.RichEmbed()
+            .setColor("RED")
+            .setDescription(`Disconnected!`);
+        let channel = await client.channels.get(process.env.CONSOLELOGID);
+        if (!channel || !channel.permissionsFor(channel.guild.me).has("SEND_MESSAGES")) return;
+        await channel.send(embed);
+        console.log("Disconnected");
+    } catch (err) {
+        console.error(err);
     }
-    console.log("Disconnected");
 };

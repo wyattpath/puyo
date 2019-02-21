@@ -6,15 +6,18 @@ module.exports = async (client, msg) => {
     if (msg.author.bot) return;
     if (msg.channel.type === "dm") return;
 
-    let messageArray = msg.content.split(" ");
-    let cmd = messageArray[0].toLowerCase();
-    let args = messageArray.slice(1);
-    let prefix = process.env.PREFIX;
-    let commandFile;
+    try {
+        let messageArray = await msg.content.split(" ");
+        let cmd = await messageArray[0].toLowerCase();
+        let args = await messageArray.slice(1);
+        let prefix = await process.env.PREFIX;
 
-
-    if (prefix === cmd.slice(0, prefix.length)) {
-        commandFile = await client.commands.get(cmd.slice(prefix.length));
-        if (commandFile) await commandFile.run(client, msg, args);
+        if (prefix !== cmd.slice(0, prefix.length)) return;
+        let commandFile = await client.commands.get(cmd.slice(prefix.length));
+        if (!commandFile) return;
+        await commandFile.run(client, msg, args);
+    } catch (err) {
+        console.error(err);
     }
-};
+}
+;
