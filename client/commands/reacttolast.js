@@ -6,17 +6,12 @@ module.exports.run = async (client, msg, args) => {
     let emoji = await client.emojis.find(emoji => emoji.name === args[0]);
     if (!emoji) return msg.reply("Couldn't find emoji");
 
-    try {
-        let fetchedMessage = await msg.channel.fetchMessages({limit: 2})
-        let lastMessage = await fetchedMessage.array()[1];
-        await lastMessage.react(emoji);
+    let fetchedMessage = await msg.channel.fetchMessages({limit: 2});
+    let lastMessage = await fetchedMessage.array()[1];
+    await lastMessage.react(emoji);
 
-        if (!msg.channel.permissionsFor(msg.guild.me).has("MANAGE_MESSAGES")) return;
-        await msg.delete();
-    } catch (err) {
-        console.error();
-    }
-
+    if (!msg.channel.permissionsFor(msg.guild.me).has("MANAGE_MESSAGES")) return;
+    await msg.delete();
 };
 
 module.exports.help = {

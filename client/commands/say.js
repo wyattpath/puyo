@@ -5,13 +5,11 @@ module.exports.run = async (client, msg, args) => {
     if (!msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
     if (!args[0]) return;
 
-    try {
-        await msg.channel.send(args.join(' '));
-        if (!msg.channel.permissionsFor(msg.guild.me).has("MANAGE_MESSAGES")) return;
-        await msg.delete();
-    } catch (error) {
-        console.error(error);
-    }
+    let channel = await msg.channel;
+    let message = await args.join(' ');
+    await msg.delete();
+    if (!msg.channel.permissionsFor(msg.guild.me).has("MANAGE_MESSAGES")) return;
+    await channel.send(message);
 };
 
 module.exports.help = {

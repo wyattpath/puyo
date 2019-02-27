@@ -3,7 +3,7 @@
  */
 module.exports.run = async (client, msg) => {
     if (!msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
-    msg.channel.send("Pong: " + client.ping + " ms").catch(console.error);
+    return msg.channel.send("Pong: " + client.ping + " ms");
 };
 
 module.exports.help = {

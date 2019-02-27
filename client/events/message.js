@@ -1,3 +1,5 @@
+const logger = require('../utils/logger.js');
+
 /**
  * Reads messages
  * Ignores bot messages. Only reads messages with prefix at the start
@@ -17,7 +19,7 @@ module.exports = async (client, msg) => {
         if (!commandFile) return;
         await commandFile.run(client, msg, args);
     } catch (err) {
-        console.error(err);
+        logger.error(client, err, msg);
     }
 }
 ;

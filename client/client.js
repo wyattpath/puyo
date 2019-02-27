@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const logger = require('./utils/logger.js');
+
 let client = new Discord.Client();
 client.commands = new Discord.Collection();
 
@@ -35,8 +37,10 @@ fs.readdir("./client/events/", async (err, files) => {
     });
 });
 
-client.on("error", (e) => console.error(e));
-client.on("warn", (e) => console.warn(e));
-client.on("debug", (e) => console.info(e));
+client.on("error", (e) => logger.error(client, e));
+client.on("warn", (e) => logger.warn(client, e));
+client.on("debug", (e) => logger.debug(client, e));
+
+process.on('uncaughtException', error => logger.error(client, error));
 
 module.exports = client;
