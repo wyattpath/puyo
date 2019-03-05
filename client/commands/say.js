@@ -7,8 +7,7 @@ module.exports.run = async (client, msg, args) => {
 
     let channel = await msg.channel;
     let message = await args.join(' ');
-    await msg.delete();
-    if (!msg.channel.permissionsFor(msg.guild.me).has("MANAGE_MESSAGES")) return;
+    if (msg.deletable) await msg.delete();
     await channel.send(message);
 };
 

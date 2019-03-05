@@ -10,8 +10,7 @@ module.exports.run = async (client, msg, args) => {
     let lastMessage = await fetchedMessage.array()[1];
     await lastMessage.react(emoji);
 
-    if (!msg.channel.permissionsFor(msg.guild.me).has("MANAGE_MESSAGES")) return;
-    await msg.delete();
+    if (msg.deletable) await msg.delete();
 };
 
 module.exports.help = {
