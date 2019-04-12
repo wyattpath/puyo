@@ -1,4 +1,3 @@
-"use strict";
 const Discord = require('discord.js');
 const {Servers} = require('../dbObjects');
 

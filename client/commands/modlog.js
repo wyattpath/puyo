@@ -1,6 +1,5 @@
-"use strict";
-const {Servers} = require('../dbObjects');
 const Discord = require('discord.js');
+const {Servers} = require('../dbObjects');
 
 /**
  * Sets modlog channel for server

@@ -1,4 +1,3 @@
-"use strict";
 const logger = require('../utils/logger.js');
 const Discord = require('discord.js');
 const fs = require("fs");
@@ -54,7 +53,7 @@ module.exports.run = async (client, msg) => {
             sEmbed.addField(usage, desclist);
         });
         msg.author.send(sEmbed);
-        msg.react("👍").catch(err => Logs.error(client, err, msg));
+        msg.react("👍").catch(err => logger.error(client, err, msg));
         msg.reply("Check DM!");
 
         if(!msg.member.hasPermission("ADMINISTRATOR")) return;
