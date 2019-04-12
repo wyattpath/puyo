@@ -1,4 +1,5 @@
 const logger = require('../utils/logger.js');
+const {Servers} = require('../dbObjects');
 
 /**
  * Reads messages
@@ -12,7 +13,9 @@ module.exports = async (client, msg) => {
         let messageArray = await msg.content.split(" ");
         let cmd = await messageArray[0].toLowerCase();
         let args = await messageArray.slice(1);
-        let prefix = await process.env.PREFIX;
+        const server = await Servers.findOne({where: {server_id: msg.guild.id}});
+        if(!server) return console.log("no prefix");
+        const prefix = server.get('prefix');
 
         if (prefix !== cmd.slice(0, prefix.length)) return;
         let commandFile = await client.commands.get(cmd.slice(prefix.length));
@@ -21,5 +24,4 @@ module.exports = async (client, msg) => {
     } catch (err) {
         logger.error(client, err, msg);
     }
-}
-;
+};
