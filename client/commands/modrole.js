@@ -82,6 +82,6 @@ module.exports.run = async (client, msg, args) => {
 module.exports.help = {
     name: "modrole",
     description: "Sets mod role",
-    usage: "modrole [rolelID]",
+    usage: "modrole [role]",
     category: "admin"
 };
