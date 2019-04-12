@@ -20,7 +20,7 @@ module.exports.run = async (client, msg, args) => {
 
 module.exports.help = {
     name: "prefix",
-    description: "changes the bot prefix",
+    description: "Changes the bot prefix",
     usage: "prefix [prefix]",
     category: "admin"
 };

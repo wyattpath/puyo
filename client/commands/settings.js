@@ -22,7 +22,7 @@ module.exports.run = async (client, msg) => {
 
 module.exports.help = {
     name: "settings",
-    description: "shows server settings",
+    description: "Shows server settings",
     usage: "settings",
     category: "admin"
 };
