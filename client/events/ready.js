@@ -25,7 +25,8 @@ module.exports = async (client) => {
 
     let embed = await new Discord.RichEmbed()
         .setColor("GREEN")
-        .setDescription(`Ready`)
+        .setTitle(`Ready`)
+        .setDescription(`${client.user.username} has started with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`)
         .setTimestamp();
     let channel = await client.channels.get(process.env.LOGCHANNELID);
     if (!channel || !channel.permissionsFor(channel.guild.me).has("SEND_MESSAGES")) return;
