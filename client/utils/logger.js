@@ -42,7 +42,7 @@ module.exports = {
         logger.log('error', error);
 
         // send in channel
-        let channel = client.channels.get(process.env.LOGCHANNELID);
+        let channel = getChannel(client);
         if (!channel) return console.log("ERROR: Couldn't find puyolog!");
 
         let emb = new RichEmbed()
