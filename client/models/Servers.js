@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
         deleted: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        edited: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     })
 };
