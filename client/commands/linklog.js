@@ -18,7 +18,7 @@ module.exports.run = async (client, msg, args) => {
         let embed = await new Discord.RichEmbed()
             .setColor("AQUA")
             .setDescription(
-                '**link [logType][#channel]** to link a logType (modlog, username) to a channel\n' +
+                '**link [logType][#channel]** to link a logType (modlog, username, nickname) to a channel\n' +
                 'ex: `linklog modlog #modlog`'
             );
         return msg.reply(embed);
