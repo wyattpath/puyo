@@ -7,7 +7,7 @@ const {Servers} = require('../dbObjects');
  */
 module.exports = async (client, msg) => {
     if (msg.author.bot) return;
-    if(!msg.guild.available) return;
+    if (!msg.guild.available) return;
 
     try {
         let server = await Servers.findOne({where: {server_id: msg.guild.id}});
@@ -42,7 +42,14 @@ module.exports = async (client, msg) => {
             .setDescription(`**Message sent by ${msg.author} deleted by ${user} in ${msg.channel}**`)
             .setFooter(`UserID: ${user.id}`)
             .setTimestamp();
-        msg.content && await embed.addField(`Message`, `${msg.content}`);
+        if (msg.content) {
+            let deletedMessages = await msg.content.match(/(.|[\r\n]){1,1023}/g);
+            for (let i = 0; i < deletedMessages.length; i++) {
+                await embed.addField(
+                    `Message[${i + 1}/${deletedMessages.length}]`,
+                    `${deletedMessages[i]}`);
+            }
+        }
         return deletedLog.send(embed);
     } catch (err) {
         logger.error(client, err);
