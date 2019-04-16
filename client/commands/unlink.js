@@ -19,7 +19,9 @@ module.exports.run = async (client, msg, args) => {
             .setColor("AQUA")
             .setTitle("Usage")
             .setDescription(
-                '**unlink [logType/roleType]** unlink a logType/roleType(modlog, username, nickname, deleted, modrole)\n' +
+                '**unlink [logType/roleType]** unlink a logType/roleType\n' +
+                'logTypes: modlog, username, nickname, deleted, edited\n' +
+                'roleTypes: modrole\n' +
                 'ex: `unlink modlog`');
         return msg.reply(embed);
     }
