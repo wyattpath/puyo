@@ -25,5 +25,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
+        deleted: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     })
 };

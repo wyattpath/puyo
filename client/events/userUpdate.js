@@ -18,7 +18,7 @@ module.exports = async (client, oldUser, newUser) => {
             const targetLog = await server && await server.get('username');
             if (!targetLog) return;
             let usernameLog = await guild.channels.get(targetLog);
-            if(!usernameLog) return;
+            if (!usernameLog) return;
 
             let embed = await new RichEmbed()
                 .setColor("#607D8B")
@@ -28,7 +28,7 @@ module.exports = async (client, oldUser, newUser) => {
                 .setTimestamp();
             return usernameLog.send(embed);
         })
-    }catch (err) {
+    } catch (err) {
         logger.error(client, err);
     }
 };

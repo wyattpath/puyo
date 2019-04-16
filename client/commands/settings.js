@@ -13,6 +13,7 @@ module.exports.run = async (client, msg) => {
     let modLog = await msg.guild.channels.get(server.get('modlog')) || "Empty";
     let usernameLog = await msg.guild.channels.get(server.get('username')) || "Empty";
     let nicknameLog = await msg.guild.channels.get(server.get('nickname')) || "Empty";
+    let deletedLog = await msg.guild.channels.get(server.get('deleted')) || "Empty";
     let sEmbed = await new RichEmbed()
         .setTitle('Server Settings')
         .setColor("AQUA")
@@ -20,7 +21,8 @@ module.exports.run = async (client, msg) => {
         .addField('Mod Role', modRole, true)
         .addField('Mod Log', modLog, true)
         .addField('Username Log', usernameLog, true)
-        .addField('Nickname Log', nicknameLog, true);
+        .addField('Nickname Log', nicknameLog, true)
+        .addField('Deleted Messages Log', deletedLog, true);
     return msg.channel.send(sEmbed);
 };
 
