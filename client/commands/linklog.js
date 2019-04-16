@@ -18,7 +18,7 @@ module.exports.run = async (client, msg, args) => {
         let embed = await new Discord.RichEmbed()
             .setColor("AQUA")
             .setDescription(
-                '**link [logType][#channel]** to link a logType (modlog) to a channel\n' +
+                '**link [logType][#channel]** to link a logType (modlog, username) to a channel\n' +
                 'ex: `linklog modlog #modlog`'
             );
         return msg.reply(embed);
@@ -56,7 +56,7 @@ module.exports.run = async (client, msg, args) => {
         } else {
             color = await "RED";
             title = await `ERROR 404 : ${logType} Not Found!`;
-            description = await `Could not find ${logType} with ID ${targetChannel.id}.`;
+            description = await `Could not find logType ${logType} with ID ${targetChannel.id}.`;
         }
     }
 
