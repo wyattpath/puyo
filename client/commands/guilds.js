@@ -9,7 +9,10 @@ module.exports.run = async (client, msg) => {
 
     // equivalent to: SELECT name FROM tags;
     const serverList = await Servers.findAll({attributes: ['server_id']});
-    const serverString = serverList.map(server => server.name).join(', ') || 'No tags set.';
+    const serverString = serverList.map(server => {
+        let guild = client.guilds.get(server.server_id);
+        return guild.name;
+    }).join(', ') || 'No tags set.';
     return msg.channel.send(`List of servers: ${serverString}`);
 };
 
