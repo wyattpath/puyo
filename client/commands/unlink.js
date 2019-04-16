@@ -19,29 +19,29 @@ module.exports.run = async (client, msg, args) => {
             .setColor("AQUA")
             .setTitle("Usage")
             .setDescription(
-                '**unlink [logType]** unlink a logType(modlog)\n' +
-                'ex: `unlinklog modlog`');
+                '**unlink [logType/roleType]** unlink a logType/roleType(modlog, modrole)\n' +
+                'ex: `unlink modlog`');
         return msg.reply(embed);
     }
 
     let server = await Servers.findOne({where: {server_id: msg.guild.id}});
     if (!server) return msg.channel.send(`Couldn't find server`);
-    let logType = await args[0];
-    let attribute = await server.rawAttributes[logType];
-    if (!attribute) return msg.channel.send(`Log type ${logType} doesn't exist`);
+    let type = await args[0];
+    let attribute = await server.rawAttributes[type];
+    if (!attribute) return msg.channel.send(`LogType/RoleType ${type} doesn't exist!`);
 
     let color, title, description;
     const affectedRows = await Servers.update(
-        {[logType]: null},
+        {[type]: null},
         {where: {server_id: msg.guild.id}});
     if (affectedRows > 0) {
         color = await "GREEN";
-        title = await `${logType} unlinked`;
-        description = await `${logType} successfully unlinked!`;
+        title = await `${type} unlinked`;
+        description = await `${type} successfully unlinked!`;
     } else {
         color = await "RED";
-        title = await `ERROR 404 : ${logType} Not Found`;
-        description = await `There is no ${logType} linked!`;
+        title = await `ERROR 404 : ${type} Not Found`;
+        description = await `There is no Log/Role ${type} linked!`;
     }
 
     let sEmbed = await new Discord.RichEmbed()
@@ -53,8 +53,8 @@ module.exports.run = async (client, msg, args) => {
 };
 
 module.exports.help = {
-    name: "unlinklog",
-    description: "Unlink a channel",
-    usage: "unlinklog [logType]",
+    name: "unlink",
+    description: "Unlink a channel or role",
+    usage: "unlink [logType/roleType]",
     category: "admin"
 };
