@@ -44,7 +44,7 @@ module.exports.run = async (client, msg, args) => {
     rMessage.delete(5000);
 
     // modlog
-    let targetLogId = await server.get('modLog_id');
+    let targetLogId = await server.get('modlog');
     if (targetLogId) {
         let sEmbed = await new RichEmbed()
             .setAuthor(`[BAN] ${toBanUser.tag}`, toBanUser.displayAvatarURL)

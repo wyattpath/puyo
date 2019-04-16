@@ -34,7 +34,7 @@ module.exports.run = async (client, msg, args) => {
     await toKick.kick(reason);
     await msg.channel.send(`<@${toKickUser.id}> has been kicked because of **${reason}**.`);
 
-    let modLogId = await server.get('modLog_id');
+    let modLogId = await server.get('modlog');
     if (modLogId) {
         let sEmbed = await new Discord.RichEmbed()
             .setAuthor(`[KICK] ${toKickUser.tag}`, toKickUser.displayAvatarURL)

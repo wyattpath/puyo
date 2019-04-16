@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        modLog_id: {
+        modlog: {
             type: DataTypes.STRING,
             allowNull: true
         },

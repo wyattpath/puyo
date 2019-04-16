@@ -4,7 +4,9 @@ const {Servers} = require('../dbObjects');
 
 module.exports.run = async (client, msg, args) => {
     if (!args[1] || !args[0]) return msg.channel.send("tempmute <@user> <1s/m/h/d> (reason)");
-    if(!msg.guild.me.hasPermission("MANAGE_ROLES")) return msg.channel.send('I need Manage Roles Permissions to do that');
+    if (!msg.guild.me.hasPermission("MANAGE_ROLES")) {
+        return msg.channel.send('I need Manage Roles Permissions to do that');
+    }
     let toMute = await (
         msg.mentions.members.first() ||
         msg.guild.members.get(args[0]) ||
@@ -25,8 +27,13 @@ module.exports.run = async (client, msg, args) => {
         canMute = await !toMute.roles.has(modRole.id) && msg.member.roles.has(modRole.id);
     }
 
-    let hasPermission = await !toMute.hasPermission("MANAGE_MESSAGES") && (msg.member.hasPermission("BAN_MEMBERS") || msg.member.hasPermission("KICK_MEMBERS"));
-    if (!hasPermission && !canMute) return msg.channel.send("You can't do that, bruuh!");
+    let hasPermission = await
+        !toMute.hasPermission("MANAGE_MESSAGES") && (
+        msg.member.hasPermission("BAN_MEMBERS") ||
+        msg.member.hasPermission("KICK_MEMBERS"));
+    if (!hasPermission && !canMute) {
+        return msg.channel.send("You can't do that, bruuh!");
+    }
 
     let muteRole = await msg.guild.roles.find(role => role.name === "Muted");
     // If no muteRole, create one
@@ -56,7 +63,7 @@ module.exports.run = async (client, msg, args) => {
 
     // log in modLog if set up
     let modLogId, channel, sEmbed;
-    let targetLogId = server.get('modLog_id');
+    let targetLogId = server.get('modlog');
     if (targetLogId) {
         channel = await msg.guild.channels.get(targetLogId);
         if (!channel) msg.channel.send("modLog channel with ID couldn't be found");
@@ -79,7 +86,7 @@ module.exports.run = async (client, msg, args) => {
         await toMute.removeRole(muteRole.id);
         msg.channel.send(`${toMute} has been unmuted!`);
 
-        modLogId = await server.get('modLog_id');
+        modLogId = await server.get('modlog');
         if (!modLogId) return;
         channel = await msg.guild.channels.get(modLogId);
         if (!channel) return msg.reply("modLog channel with ID couldn't be found");
