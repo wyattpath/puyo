@@ -17,13 +17,15 @@ module.exports.run = async (client, msg, args) => {
     let canKick;
     let server = await Servers.findOne({where: {server_id: msg.guild.id}});
 
-    let targetRoleId = await server && await server.get('modRole_id');
+    let targetRoleId = await server && await server.get('modrole');
     if (targetRoleId) {
         modRole = await msg.guild.roles.get(targetRoleId);
         canKick = await (!toKick.roles.has(modRole.id) && msg.member.roles.has(modRole.id));
         if (!canKick) return msg.reply("You can't do that, bruuh!");
     }
-    let hasPermission = await (!toKick.hasPermission("KICK_MEMBERS") && msg.member.hasPermission("KICK_MEMBERS"));
+    let hasPermission = await (
+        !toKick.hasPermission("KICK_MEMBERS") &&
+        msg.member.hasPermission("KICK_MEMBERS"));
     if (!hasPermission && !canKick) return msg.reply("Missing permissions");
 
     if (toKick.user === client.user) return msg.channel.send("You can't use this command on me!");

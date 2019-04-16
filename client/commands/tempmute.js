@@ -17,7 +17,7 @@ module.exports.run = async (client, msg, args) => {
 
     let server = await Servers.findOne({where: {server_id: msg.guild.id}});
     // check if modrole is setup
-    let modRoleId = await server && await server.get('modRole_id');
+    let modRoleId = await server && await server.get('modrole');
     let canMute;
 
     if (modRoleId) {

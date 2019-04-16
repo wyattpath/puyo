@@ -19,7 +19,7 @@ module.exports.run = async (client, msg, args) => {
     let canBan;
     let server = await Servers.findOne({where: {server_id: msg.guild.id}});
 
-    let targetRoleId = await server && server.get('modRole_id');
+    let targetRoleId = await server && server.get('modrole');
     if (targetRoleId) {
         modRole = await msg.guild.roles.get(targetRoleId);
         if (toBan.roles.has(modRole.id)) return msg.channel.send("You can't ban this member");

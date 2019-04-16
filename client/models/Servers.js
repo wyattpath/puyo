@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 'p!',
             allowNull: false
         },
-        modRole_id: {
+        modrole: {
             type: DataTypes.STRING,
             allowNull: true,
         },
