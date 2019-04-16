@@ -15,8 +15,10 @@ module.exports = async (client, oldUser, newUser) => {
 
         await commonGuilds.map(async guild => {
             const server = await Servers.findOne({where: {server_id: guild.id}});
-            const usernameLog = await server && await server.get('username');
-            if (!usernameLog) return;
+            const targetLog = await server && await server.get('username');
+            if (!targetLog) return;
+            let usernameLog = await guild.channels.get(targetLog);
+            if(!usernameLog) return;
 
             let embed = await new RichEmbed()
                 .setColor("#607D8B")
