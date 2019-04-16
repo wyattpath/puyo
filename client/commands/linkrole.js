@@ -51,7 +51,7 @@ module.exports.run = async (client, msg, args) => {
         } else {
             color = await "RED";
             title = await `ERROR 404 : ${roleType} Not Found!`;
-            description = await `Could not find ${roleType} with ID ${targetRole.id}.`;
+            description = await `Could not find roleType ${roleType} with ID ${targetRole.id}.`;
         }
     }
 

@@ -12,9 +12,9 @@ module.exports = async (client, guild) => {
             .setColor("GREEN")
             .setTitle(`Server added`)
             .setDescription(`Puyo added to Server ${guild.name} ! Puyo is now on ${client.guilds.size} servers!`)
-            .addField(`Owner`, guild.owner)
-            .addField(`Server ID`, guild.id)
-            .addField(`Server Size`, guild.memberCount)
+            .addField(`Owner`, guild.owner, true)
+            .addField(`Server ID`, guild.id, true)
+            .addField(`Server Size`, guild.memberCount, true)
             .setTimestamp();
         let channel = await client.channels.get(process.env.CONSOLELOGID);
         if (!channel || !channel.permissionsFor(channel.guild.me).has("SEND_MESSAGES")) return;
