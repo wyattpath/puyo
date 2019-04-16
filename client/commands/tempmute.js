@@ -104,7 +104,7 @@ module.exports.run = async (client, msg, args) => {
 
 module.exports.help = {
     name: "tempmute",
-    description: "tempmutes someone for a specific time",
+    description: "Tempmutes someone for a specific time",
     usage: "tempmute <@user> <1s/m/h/d> (reason)",
     category: "mod"
 };

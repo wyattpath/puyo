@@ -71,7 +71,7 @@ module.exports.run = async (client, msg, args) => {
 
 module.exports.help = {
     name: "linklog",
-    description: "Link a channel",
+    description: "Link a channel for logging",
     usage: "linklog [logType] [#channel]",
     category: "admin"
 };
