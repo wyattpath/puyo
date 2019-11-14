@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 const ms = require('ms');
 const {Servers} = require('../dbObjects');
 
@@ -62,22 +62,22 @@ module.exports.run = async (client, msg, args) => {
     msg.channel.send(`${toMute} has been muted for **${ms(ms(muteTime))}** because of **${reason}**.`);
 
     // log in modLog if set up
-    let modLogId, channel, sEmbed;
+    let modLogId, channel, serverEmbed;
     let targetLogId = server.get('modlog');
     if (targetLogId) {
         channel = await msg.guild.channels.get(targetLogId);
         if (!channel) msg.channel.send("modLog channel with ID couldn't be found");
 
-        sEmbed = await new Discord.RichEmbed()
+        serverEmbed = await new RichEmbed()
             .setAuthor(`[TEMPMUTE] ${toMute.user.tag}`, toMute.user.avatarURL)
-            .setColor(`#ef9c15`) // orange
+            .setColor(`ORANGE`)
             .addField(`User`, toMute)
             .addField(`Moderator`, msg.author, true)
             .addField(`Reason`, reason, true)
             .addField(`Duration`, ms(ms(muteTime)))
             .setTimestamp();
 
-        channel.send(sEmbed);
+        channel.send(serverEmbed);
     }
 
     // unmute
@@ -91,15 +91,15 @@ module.exports.run = async (client, msg, args) => {
         channel = await msg.guild.channels.get(modLogId);
         if (!channel) return msg.reply("modLog channel with ID couldn't be found");
 
-        sEmbed = await new Discord.RichEmbed()
-            .setColor(`#50f442`)
+        serverEmbed = await new RichEmbed()
+            .setColor('GREEN')
             .setAuthor(`[UNMUTE] ${toMute.user.tag}`, toMute.user.avatarURL)
             .addField(`User`, toMute)
             .addField(`Moderator`, client.user)
             .setTimestamp();
 
-        channel.send(sEmbed);
-    }, ms(muteTime));
+        channel.send(serverEmbed);
+    }, JSON.parseInt(ms(muteTime)));
 };
 
 module.exports.help = {
