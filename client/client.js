@@ -29,12 +29,14 @@ fs.readdir("./client/commands/", async (err, files) => {
  */
 fs.readdir("./client/events/", async (err, files) => {
     if (err) return console.error(err);
-    await files.forEach(async file => {
-        const event = await require(`./events/${file}`);
-        let eventName = await file.split(".")[0];
-        await client.on(eventName, event.bind(null, client));
+    let file;
+    for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
+        file = files[fileIndex];
+        const event = require(`./events/${file}`);
+        let eventName = file.split(".")[0];
+        client.on(eventName, event.bind(null, client));
         delete require.cache[require.resolve(`./events/${file}`)];
-    });
+    }
 });
 
 client.on("error", (e) => logger.error(client, e));
@@ -42,5 +44,13 @@ client.on("warn", (e) => logger.warn(client, e));
 client.on("debug", (e) => logger.debug(client, e));
 
 process.on('uncaughtException', error => logger.error(client, error));
+process.on("unhandledRejection", (reason, promise) => {
+    console.warn(
+        "Unhandled promise rejection:",
+        promise,
+        "reason:",
+        reason.stack || reason
+    );
+});
 
 module.exports = client;
