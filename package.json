@@ -10,7 +10,7 @@
     "debug": "^2.6.9",
     "discord": "^0.8.2",
     "discord.js": "^11.5.1",
-    "express": "~4.16.0",
+    "express": "~4.18.2",
     "http-errors": "^1.7.3",
     "morgan": "~1.9.0",
     "ms": "^2.1.2",
